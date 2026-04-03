@@ -1,0 +1,171 @@
+/* Dashboard */
+.dashboard-hero {
+  background: linear-gradient(135deg, rgba(0, 255, 102, 0.08), rgba(0, 212, 255, 0.05));
+  border: 1px solid rgba(0, 255, 102, 0.15);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl) var(--spacing-2xl);
+  margin-bottom: var(--spacing-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0, 255, 102, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.dashboard-hero-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.dashboard-hero-value {
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--accent-green);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.dashboard-hero-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: var(--spacing-sm);
+}
+
+.dashboard-hero-sub span {
+  font-family: var(--font-mono);
+  color: var(--accent-red);
+}
+
+.dashboard-section-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.dashboard-section-title svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Budget Progress Items */
+.budget-item {
+  padding: var(--spacing-md) 0;
+}
+
+.budget-item + .budget-item {
+  border-top: 1px solid rgba(51, 51, 51, 0.5);
+}
+
+.budget-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.budget-item-name {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 0.85rem;
+}
+
+.budget-item-values {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Bill Card */
+.bill-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.02);
+  transition: background var(--transition-fast);
+}
+
+.bill-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.bill-item + .bill-item {
+  margin-top: var(--spacing-sm);
+}
+
+.bill-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bill-name {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.bill-category {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.bill-right {
+  text-align: right;
+}
+
+.bill-amount {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-red);
+  font-variant-numeric: tabular-nums;
+}
+
+.bill-countdown {
+  font-size: 0.7rem;
+  color: var(--accent-amber);
+  margin-top: 2px;
+}
+
+/* Sparkline container */
+.sparkline-chart {
+  height: 120px;
+  margin-top: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+  .dashboard-hero {
+    padding: var(--spacing-lg);
+  }
+  
+  .dashboard-hero-value {
+    font-size: 2rem;
+  }
+  
+  .dashboard-hero::before {
+    top: -30%;
+    right: -40%;
+    width: 200px;
+    height: 200px;
+  }
+}

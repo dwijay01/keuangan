@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: keuangan_db
+    restart: unless-stopped
+    ports:
+      # Optional: Jika ingin mengakses DB langsung dari host VPS
+      # - "3306:3306"  
+    environment:
+      MYSQL_DATABASE: keuangan
+      MYSQL_ROOT_PASSWORD: secret_root_pass_jangan_disebar!
+      MYSQL_USER: keuangan_user
+      MYSQL_PASSWORD: keuangan_password
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - keuangan_net
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: keuangan_backend
+    restart: unless-stopped
+    environment:
+      APP_ENV: production
+      APP_DEBUG: false
+      APP_KEY: ${APP_KEY} # Nanti di set via .env di server
+      # Karena API di proxy oleh nginx, URL aplikasi harus URL valid public
+      APP_URL: "https://fin.goldendragon.id"
+      FRONTEND_URL: "https://fin.goldendragon.id"
+      SANCTUM_STATEFUL_DOMAINS: "fin.goldendragon.id"
+      SESSION_DOMAIN: ".goldendragon.id"
+      # Koneksi database docker to docker
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: keuangan
+      DB_USERNAME: keuangan_user
+      DB_PASSWORD: keuangan_password
+    depends_on:
+      - db
+    networks:
+      - keuangan_net
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: keuangan_web
+    restart: unless-stopped
+    ports:
+      # Melayani Cloudflare Tunnel yang menembak ke http://localhost:8085
+      - "8085:80"
+    depends_on:
+      - backend
+    networks:
+      - keuangan_net
+
+networks:
+  keuangan_net:
+    driver: bridge
+
+volumes:
+  db_data:

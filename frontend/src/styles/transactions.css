@@ -1,0 +1,86 @@
+/* Transaction Form */
+.transaction-form {
+  padding: var(--spacing-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.transaction-form-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+/* Split rows */
+.split-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 150px auto;
+  gap: var(--spacing-md);
+  align-items: flex-end;
+  padding: var(--spacing-sm) 0;
+}
+
+.split-row + .split-row {
+  border-top: 1px solid rgba(51, 51, 51, 0.3);
+  padding-top: var(--spacing-md);
+}
+
+.add-split-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--accent-cyan);
+  font-size: 0.85rem;
+  cursor: pointer;
+  background: none;
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  transition: all var(--transition-fast);
+  font-family: var(--font-ui);
+  width: 100%;
+  justify-content: center;
+  margin-top: var(--spacing-sm);
+}
+
+.add-split-btn:hover {
+  border-color: var(--accent-cyan);
+  background: var(--accent-cyan-dim);
+}
+
+/* Ledger */
+.ledger-row-income .mono-cell {
+  color: var(--accent-green);
+}
+
+.ledger-row-expense .mono-cell {
+  color: var(--accent-red);
+}
+
+.transaction-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.transaction-actions {
+  display: flex;
+  gap: var(--spacing-xs);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.table tr:hover .transaction-actions {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .split-row {
+    grid-template-columns: 1fr;
+  }
+}
