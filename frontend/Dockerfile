@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Install dependency (memanfaatkan layer caching)
 COPY package*.json ./
-RUN npm ci
+RUN npm install
 
 # Copy source code dan build React ke folder /dist
 COPY . .
