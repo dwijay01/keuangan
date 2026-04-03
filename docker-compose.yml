@@ -5,7 +5,7 @@ services:
     image: mysql:8.0
     container_name: keuangan_db
     restart: unless-stopped
-    ports:
+    # ports:
       # Optional: Jika ingin mengakses DB langsung dari host VPS
       # - "3306:3306"  
     environment:
@@ -24,22 +24,8 @@ services:
       dockerfile: Dockerfile
     container_name: keuangan_backend
     restart: unless-stopped
-    environment:
-      APP_ENV: production
-      APP_DEBUG: false
-      APP_KEY: ${APP_KEY} # Nanti di set via .env di server
-      # Karena API di proxy oleh nginx, URL aplikasi harus URL valid public
-      APP_URL: "https://fin.goldendragon.id"
-      FRONTEND_URL: "https://fin.goldendragon.id"
-      SANCTUM_STATEFUL_DOMAINS: "fin.goldendragon.id"
-      SESSION_DOMAIN: ".goldendragon.id"
-      # Koneksi database docker to docker
-      DB_CONNECTION: mysql
-      DB_HOST: db
-      DB_PORT: 3306
-      DB_DATABASE: keuangan
-      DB_USERNAME: keuangan_user
-      DB_PASSWORD: keuangan_password
+    env_file:
+      - ./backend/.env
     depends_on:
       - db
     networks:
